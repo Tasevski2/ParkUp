@@ -1,0 +1,1 @@
+Nie sme najaki
