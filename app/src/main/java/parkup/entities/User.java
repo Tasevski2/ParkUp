@@ -1,16 +1,15 @@
 package parkup.entities;
 
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class ProbaUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int id;
+    private int userId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -24,24 +23,26 @@ public class ProbaUser {
     @Column(name = "password")
     private String password;
 
-    public ProbaUser() {
+    @Column(name = "mobile")
+    private String mobile;
 
-    }
+    public User() {}
 
-    public ProbaUser(int id, String firstName, String lastName, String email, String password) {
-        this.id = id;
+    public User(int userId, String firstName, String lastName, String email, String password, String mobile) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.mobile = mobile;
     }
 
     public int getId() {
-        return id;
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -74,5 +75,13 @@ public class ProbaUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMobile() {
+        return password;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }
