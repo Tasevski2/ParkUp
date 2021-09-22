@@ -1,15 +1,15 @@
 package parkup.entities;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private UUID userId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -20,15 +20,18 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "pass")
     private String password;
 
     @Column(name = "mobile")
     private String mobile;
 
+    @Column(name = "RegAdmin")
+    protected boolean regAdmin;
+
     public User() {}
 
-    public User(int userId, String firstName, String lastName, String email, String password, String mobile) {
+    public User(UUID userId, String firstName, String lastName, String email, String password, String mobile) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,11 +40,19 @@ public class User {
         this.mobile = mobile;
     }
 
-    public int getId() {
+    public User(String firstName, String lastName, String email, String password, String mobile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.mobile = mobile;
+    }
+
+    public UUID getId() {
         return userId;
     }
 
-    public void setId(int userId) {
+    public void setId(UUID userId) {
         this.userId = userId;
     }
 
@@ -81,7 +92,9 @@ public class User {
         return password;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+    public void setMobile(String mobile) {this.mobile = mobile;}
+
+    public boolean RegUser() {return regAdmin;}
+
+    public void setRegUser(boolean regAdmin) {this.regAdmin = regAdmin;}
 }

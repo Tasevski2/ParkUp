@@ -1,10 +1,10 @@
 package parkup.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import parkup.entities.Parkirac;
+import parkup.entities.Guest;
 
 import java.util.UUID;
 
-public interface ParkiracRepository extends JpaRepository<Parkirac, UUID> {
+public interface GuestRepository extends JpaRepository<Guest, UUID> {
 
 }

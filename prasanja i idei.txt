@@ -4,9 +4,9 @@ za da se razlikuvaat vraboten i administrator, da vovedeme static promenliva rol
 
 //na slicen princip ako moze da se napravi za registriranParkirac i Guest 
 
--enumeracii 4 za: registeredUser, guestUser, administrator i vraboten
+-enumeracii 4 za: registeredUser, guestUser, administrator i vraboten--done
 
--za registarski tablicki da se cuva niza kako objekt -niza stringovi
+-za registarski tablicki da se cuva niza kako objekt -niza stringovi--done
 
 -za IDSpace u ParkingSpace klasu, zatoj sto ke mora da ima ipak obicno nekakvo IDSpace za databazu, a ke treba da ima i ime 
 takoj da ovaj promenliva da se smeni u nesto kako psName -da
@@ -16,3 +16,7 @@ takoj da ovaj promenliva da se smeni u nesto kako psName -da
 -za ParkingSpace koordinati za da se prakja na frontend
 
 -ParkingSession kako posebna klasa i posle kako da gi instanciramo kude posebnoga parkiraca kd ke se parkira preko funkciju
+
+
+
+UUID za id u entity klasi i trgni enumeracii i stavii bool za parkirac i user

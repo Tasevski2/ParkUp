@@ -1,17 +1,22 @@
 package parkup.entities;
+import parkup.data.Tablicka;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "parkirac")
 public class Parkirac {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "parkirac_id")
-    private int parkiracId;
+    private UUID parkiracId;
 
-    @Column(name = "reg_tablicki")  //??? ako ima povekje vaka li da se pretstavat
-    private String [] regTablickStrings;
+    @OneToMany
+    @Column(name = "reg_tablicki")
+    private List<Tablicka> regTablicki;
 
     @Column(name = "email")
     private String email;
@@ -19,31 +24,38 @@ public class Parkirac {
     @Column(name = "mobile")
     private String mobile;
 
+    @Column(name = "regParkirac")
+    protected boolean regParkirac;
 
-    public Parkirac(){}
+    public Parkirac(){
+        List<Tablicka> regTablicki = new ArrayList<Tablicka>();
+    }
 
-    public Parkirac(int parkiracId, String[] regTablickStrings, String email, String mobile) {
+    public Parkirac(UUID parkiracId, List<Tablicka> regTablicki, String email, String mobile) {
         this.parkiracId = parkiracId;
-        this.regTablickStrings = regTablickStrings;
+        this.regTablicki = regTablicki;
         this.email = email;
         this.mobile = mobile;
     }
 
-    public int getId() {
+    public Parkirac(List<Tablicka> regTablicki, String email, String mobile) {
+        this.regTablicki = regTablicki;
+        this.email = email;
+        this.mobile = mobile;
+    }
+
+
+    public UUID getId() {
         return parkiracId;
     }
 
-    public void setId(int parkiracId) {
+    public void setId(UUID parkiracId) {
         this.parkiracId = parkiracId;
     }
 
-    public String[] getRegTablickStrings() {
-        return regTablickStrings;
-    }
+    public List<Tablicka> getRegTablicki() {return regTablicki;}
 
-    public void setRegTablickStrings(String[] regTablickStrings) {
-        this.regTablickStrings = regTablickStrings;
-    }
+    public void setRegTablicki(List<Tablicka> regTablicki) {this.regTablicki = regTablicki;}
 
     public String getEmail() {
         return email;
@@ -61,5 +73,7 @@ public class Parkirac {
         this.mobile = mobile;
     }
 
-    
+    public boolean RegParkirac() {return regParkirac;}
+
+    public void setRegParkirac(boolean regParkirac) {this.regParkirac = regParkirac;}
 }

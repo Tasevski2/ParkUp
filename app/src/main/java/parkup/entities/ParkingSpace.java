@@ -1,14 +1,14 @@
 package parkup.entities;
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "parking_space")
 public class ParkingSpace {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "parking_space_id")
-    private int psId;
+    private UUID psId;
 
     @Column(name = "psName")
     private String psName;
@@ -19,20 +19,26 @@ public class ParkingSpace {
     @Column(name = "isHandicaped")
     private boolean isHandicaped;
 
-    ParkingSpace(){}
+    public ParkingSpace(){}
 
-    public ParkingSpace(int psId, String psName, boolean isTaken, boolean isHandicaped) {
+    public ParkingSpace(UUID psId, String psName, boolean isTaken, boolean isHandicaped) {
         this.psId = psId;
         this.psName = psName;
         this.isTaken = isTaken;
         this.isHandicaped = isHandicaped;
     }
 
-    public int getPsId() {
+    public ParkingSpace(String psName, boolean isTaken, boolean isHandicaped) {
+        this.psName = psName;
+        this.isTaken = isTaken;
+        this.isHandicaped = isHandicaped;
+    }
+
+    public UUID getPsId() {
         return psId;
     }
 
-    public void setPsId(int psId) {
+    public void setPsId(UUID psId) {
         this.psId = psId;
     }
 
@@ -59,7 +65,5 @@ public class ParkingSpace {
     public void setHandicaped(boolean isHandicaped) {
         this.isHandicaped = isHandicaped;
     }
-
-    
 
 }

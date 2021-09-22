@@ -1,14 +1,14 @@
 package parkup.entities;
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "parking_session")
 public class ParkingSession {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "parking_session_id")
-    private int pssId;
+    private UUID pssId;
 
     @Column(name = "time_start")
     private String timeStart;
@@ -16,19 +16,24 @@ public class ParkingSession {
     @Column(name = "time_end")
     private String timeEnd;
 
-    ParkingSession(){}
+    public ParkingSession(){}
 
-    public ParkingSession(int pssId, String timeStart, String timeEnd) {
+    public ParkingSession(UUID pssId, String timeStart, String timeEnd) {
         this.pssId = pssId;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
     }
 
-    public int getPssId() {
+    public ParkingSession(String timeStart, String timeEnd) {
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+    }
+
+    public UUID getPssId() {
         return pssId;
     }
 
-    public void setPssId(int pssId) {
+    public void setPssId(UUID pssId) {
         this.pssId = pssId;
     }
 
@@ -47,6 +52,5 @@ public class ParkingSession {
     public void setTimeEnd(String timeEnd) {
         this.timeEnd = timeEnd;
     }
-
     
 }

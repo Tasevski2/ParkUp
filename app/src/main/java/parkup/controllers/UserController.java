@@ -3,27 +3,27 @@ package parkup.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import parkup.entities.User;
-import parkup.services.UserServiceImpl;
+import parkup.services.UserService;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class UserController {
-    private UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public List<User> getAllUsers(){
         return userService.getUsers();
     }
 
     @GetMapping("/user/{userId}")
-    public User getUser(@PathVariable int userId) {
+    public User getUser(@PathVariable UUID userId) {
         User user = userService.findById(userId);
 
         if(user != null)
@@ -34,19 +34,16 @@ public class UserController {
 
     @PostMapping("/user")
     public void addUser(@RequestBody User user) {
-        user.setId(0);
-        userService.saveUser(user);
+        userService.addUser(user);
     }
 
-    @PutMapping("/user")
-    public void updateUser(@PathVariable int userId, @RequestBody User user) {
-        user.setId(0);
+    @PutMapping("/user/{userId}")
+    public void updateUser(@PathVariable UUID userId, @RequestBody User user) {
         userService.updateUser(userId, user);
     }
 
-    @DeleteMapping("/user")
-    public void deleteUser(@RequestBody User user) {
-        user.setId(0);
-        userService.saveUser(user);
+    @DeleteMapping("/user/{userId}")
+    public void deleteUser(@PathVariable UUID userId, @RequestBody User user) {
+        userService.deleteUser(userId);
     }
 }
