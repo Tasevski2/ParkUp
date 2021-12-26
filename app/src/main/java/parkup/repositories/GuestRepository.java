@@ -1,10 +1,15 @@
 package parkup.repositories;
 
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import parkup.entities.Guest;
 
-import java.util.UUID;
+@Repository
+public interface GuestRepository extends JpaRepository<Guest, Integer> {
+    Guest findByGuestId(int id);
 
-public interface GuestRepository extends JpaRepository<Guest, UUID> {
+    void deleteByGuestId(int id);
 
+    Optional<Guest> findGuestByEmail(String email);
 }

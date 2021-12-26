@@ -1,49 +1,87 @@
 package parkup.entities;
+
 import javax.persistence.*;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "parking_space")
 public class ParkingSpace {
-
     @Id
     @Column(name = "parking_space_id")
-    private UUID psId;
+    @SequenceGenerator(
+            name="parking_space_sequence_generator",
+            sequenceName = "parking_space_sequence",
+            allocationSize = 1,
+            initialValue = 700
+    )
+    @GeneratedValue(    //za postgres treba sequence da se namesti i ime na generator mi ga davamo kako od gore sto e
+            strategy = GenerationType.SEQUENCE,
+            generator = "parking_space_sequence_generator"
+    )
+    private int psId;
 
     @Column(name = "psName")
     private String psName;
 
     @Column(name = "isTaken")
-    private boolean isTaken;
+    private boolean taken;
 
-    @Column(name = "isHandicaped")
-    private boolean isHandicaped;
+    @Column(name = "latitude")
+    private float lat;
 
-    public ParkingSpace(){}
+    @Column(name = "longitude")
+    private float lng;
 
-    public ParkingSpace(UUID psId, String psName, boolean isTaken, boolean isHandicaped) {
+//    @OneToOne(cascade = {CascadeType.ALL})
+//    @JoinColumn(name = "parking_zona")
+//    private ParkingZone parkingZone;
+//    @ManyToOne(cascade = {CascadeType.ALL})
+//    @JoinColumn(name = "parking_zona")
+//    private ParkingZone parkingZone;
+//
+//    @OneToMany
+//    @Column(name="parking_sessions")
+//    private List<ParkingSession> sessions;
+
+    public ParkingSpace() {
+
+    }
+
+    public ParkingSpace(int psId, String psName, boolean isTaken,  float lat, float lng) {
         this.psId = psId;
         this.psName = psName;
-        this.isTaken = isTaken;
-        this.isHandicaped = isHandicaped;
+        this.taken = isTaken;
+        this.lat = lat;
+        this.lng = lng;
     }
 
-    public ParkingSpace(String psName, boolean isTaken, boolean isHandicaped) {
+    public ParkingSpace(String psName,  float lat, float lng) {
         this.psName = psName;
-        this.isTaken = isTaken;
-        this.isHandicaped = isHandicaped;
+        this.taken = false;
+        this.lat = lat;
+        this.lng = lng;
     }
 
-    public UUID getPsId() {
-        return psId;
+    public int getPsId() {
+        return this.psId;
     }
 
-    public void setPsId(UUID psId) {
+//    public ParkingZone getParkingZone() {
+//        return parkingZone;
+//    }
+//
+//    public void setParkingZone(ParkingZone parkingZone) {
+//        this.parkingZone = parkingZone;
+//    }
+
+
+    public void setPsId(int psId) {
         this.psId = psId;
     }
 
     public String getPsName() {
-        return psName;
+        return this.psName;
     }
 
     public void setPsName(String psName) {
@@ -51,19 +89,38 @@ public class ParkingSpace {
     }
 
     public boolean isTaken() {
-        return isTaken;
+        return this.taken;
     }
 
     public void setTaken(boolean isTaken) {
-        this.isTaken = isTaken;
+        this.taken = isTaken;
     }
 
-    public boolean isHandicaped() {
-        return isHandicaped;
+    public float getLat() {
+        return lat;
     }
 
-    public void setHandicaped(boolean isHandicaped) {
-        this.isHandicaped = isHandicaped;
+    public void setLat(float lat) {
+        this.lat = lat;
     }
 
+    public float getLng() {
+        return lng;
+    }
+
+    public void setLng(float lng) {
+        this.lng = lng;
+    }
+
+
+    @Override
+    public String toString() {
+        return "ParkingSpace{" +
+                "psName='" + psName + '\'' +
+                ", isTaken=" + taken +
+                ", lat=" + lat +
+                ", lng=" + lng+
+                '}';
+    }
 }
+

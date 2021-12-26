@@ -1,9 +1,16 @@
 package parkup.repositories;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import parkup.entities.ParkingSpace;
 import parkup.entities.ParkingZone;
 
-import java.util.UUID;
+import java.util.List;
 
-public interface ParkingZoneRepository extends JpaRepository<ParkingZone, UUID>{
-    
+@Repository
+public interface ParkingZoneRepository extends JpaRepository<ParkingZone, Integer> {
+    ParkingZone findByPzId(int id);
+
+    ParkingZone findByPzName(String name);
+    void deleteByPzId(int id);
 }
